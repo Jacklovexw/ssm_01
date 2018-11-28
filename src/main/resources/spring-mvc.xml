@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	<!-- 扫描controller -->
+	<context:component-scan base-package="com.zhidi.controller"/>
+	<!-- 开启springmvc注解驱动 -->
+	<mvc:annotation-driven/>
+	<!-- 配置视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/page/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	<!-- 静态资源不拦截配置1 此配置 如果静态资源在
+	WEB-INF下外部资源访问不到， 而且服务器的web.xml中处理servlet的名字没有叫
+	default的需指定属性default-servlet-name 有局限性 不建议使用此种方法-->
+	<!-- <mvc:default-servlet-handler default-servlet-name="default"/> -->
+	<!--静态资源不拦截配置2  解决上面配置1的问题 location指静态资源文件位置  mapping指通过映射 我们就相当于和访问资源 项目根路径下的/static/下的文件等价-->
+	<mvc:resources location="/WEB-INF/static/" mapping="/static/"/>
+</beans>
